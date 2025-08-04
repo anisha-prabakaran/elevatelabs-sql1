@@ -1,0 +1,33 @@
+CREATE DATABASE LibraryDB;
+USE LibraryDB;
+
+CREATE TABLE Author (
+    AuthorID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Nationality VARCHAR(50)
+);
+
+CREATE TABLE Book (
+    BookID INT AUTO_INCREMENT PRIMARY KEY,
+    Title VARCHAR(150) NOT NULL,
+    Genre VARCHAR(50),
+    AuthorID INT,
+    FOREIGN KEY (AuthorID) REFERENCES Author(AuthorID)
+);
+
+CREATE TABLE Member (
+    MemberID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Email VARCHAR(100) UNIQUE,
+    JoinDate DATE
+);
+
+CREATE TABLE Borrow (
+    BorrowID INT AUTO_INCREMENT PRIMARY KEY,
+    BookID INT,
+    MemberID INT,
+    BorrowDate DATE,
+    ReturnDate DATE,
+    FOREIGN KEY (BookID) REFERENCES Book(BookID),
+    FOREIGN KEY (MemberID) REFERENCES Member(MemberID)
+);
